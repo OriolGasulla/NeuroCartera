@@ -1,0 +1,12 @@
+streamlit
+streamlit_lottie
+streamlit-aggrid
+pandas
+numpy
+yfinance
+riskfolio-lib
+plotly
+altair
+openai
+pycoingecko
+apscheduler

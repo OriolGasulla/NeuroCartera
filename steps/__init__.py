@@ -1,0 +1,1 @@
+# Aquest fitxer pot quedar buit, però és necessari perquè Python reconegui el paquet.
