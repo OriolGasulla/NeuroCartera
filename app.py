@@ -6,6 +6,7 @@ import requests
 from steps.pas1 import show as show_pas1
 from steps.pas2 import show as show_pas2
 from steps.pas3 import show as show_pas3
+from steps.resum_temporal import show as show_resum_temporal
 
 # Després dels imports:
 if "page" not in st.session_state:
@@ -165,7 +166,7 @@ st.markdown("""
 # -------------------------------------------------------------------
 if st.session_state.page == "landing":
   st.markdown("""
-  <div style='text-align: center; margin: -50px 0 2em;'>
+  <div style='text-align: center; margin: -50px 0 2em; margin-bottom: 0px;'>
     <a href="?page=landing" target="_self" style="text-decoration: none;">
       <img src='https://i.imgur.com/JSTDDGq.png' style='width:180px; filter: brightness(0) invert(1);'/>
         <h1 style='color:#fff; margin:0.2em 0;'>NeuroCartera</h1>
@@ -178,7 +179,7 @@ if st.session_state.page == "landing":
 else:
   st.markdown(
       """
-      <div style='text-align: center; margin: -50px 0;'>
+      <div style='text-align: center; margin: -50px 0; margin-bottom: 15px;'>
         <a href="?page=landing" target="_self" style="text-decoration: none;">
           <img src="https://i.imgur.com/JSTDDGq.png"
               style="width:180px; filter: brightness(0) invert(1);"/>
@@ -192,6 +193,31 @@ else:
 # -------------------------------------------------------------------
 # 5. Rotació de pàgines
 # -------------------------------------------------------------------
+# Total de passos
+TOTAL_STEPS = 6
+
+# Assigna un número segons la pàgina actual
+step_mapping = {
+    "quiz_step_1": 1,
+    "quiz_step_2": 2,
+    "quiz_step_3": 3,
+    "quiz_step_4": 4,
+    "quiz_step_5": 5,
+    "quiz_step_6": 6
+}
+
+current_step = step_mapping.get(st.session_state.get("page", "landing"), 0)
+
+# Barra de progrés (només si estem a partir del pas 1)
+TOTAL_STEPS = 6
+
+if current_step > 0:
+  percentatge = int(((current_step - 1) / (TOTAL_STEPS - 1)) * 100)
+  percentatge = max(0, percentatge)  # per evitar valors negatius
+
+  st.progress((current_step - 1) / (TOTAL_STEPS - 1), text=f"{percentatge}% completat")
+
+
 if st.session_state.page == "landing":
     st.subheader("El teu assessor d'inversió personalitzat i educatiu")
     st.write("Benvingut/da a **NeuroCartera**, la plataforma gratuïta que et guia pas a pas.")
@@ -238,5 +264,18 @@ elif st.session_state.page == "quiz_step_3":
         st.markdown('</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
+        st.button("Continuar →", on_click=lambda: st.session_state.__setitem__('page','resum_temporal'))
+        st.markdown('</div>', unsafe_allow_html=True)
+
+elif st.session_state.page == "resum_temporal":
+    show_resum_temporal()
+    col1, col2 = st.columns(2, gap="small")
+    with col1:
+        st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
+        st.button("← Enrere", on_click=lambda: st.session_state.__setitem__('page','quiz_step_3'))
+        st.markdown('</div>', unsafe_allow_html=True)
+    with col2:
+        st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
         st.button("Finalitzar", on_click=lambda: st.session_state.__setitem__('page','landing'))
         st.markdown('</div>', unsafe_allow_html=True)
+

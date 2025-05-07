@@ -5,20 +5,17 @@ def show():
     st.subheader("Dades Generals")
 
     # 1) Edat de l'usuari
-    st.number_input(
-        label="Quina és la teva edat?",
-        min_value=18,
-        max_value=100,
-        step=1,
-        key="age"
-    )
+    st.session_state["age"] = st.number_input("Quina es la teva edat?", min_value=18, max_value=100)
 
     # 2) Situació financera personal
     fs = st.selectbox(
         label="Com descriuries la teva situació financera actual?",
         options=["Estable", "Moderada", "Inestable"],
-        key="financial_situation"
     )
+
+    # Assignar manualment a session_state
+    st.session_state["financial_situation"] = fs
+
     # Explicació contextual automàtica segons la selecció
     if fs == "Inestable":
         st.info(
@@ -37,19 +34,8 @@ def show():
         )
 
 
-    # 3) Capital disponible a invertir
-    capital_option = st.selectbox(
-        label="Capital disponible per a inversió (aproximat):",
-        options=[
-            "Menys de 5.000 €",
-            "De 5.000 € a 15.000 €",
-            "Més de 15.000 €",
-            "No ho sé encara"
-        ],
-        key="capital_option"
-    )
-    # 4) Horitzó d'inversió
-    st.selectbox(
+    # 3) Horitzó d'inversió
+    st.session_state["investment_horizon"]=st.selectbox(
         label="Horitzó d’inversió:",
         options=[
             "Menys de 3 anys", 
@@ -57,5 +43,4 @@ def show():
             "De 5 a 10 anys", 
             "Més de 10 anys"
         ],
-        key="investment_horizon"
     )
