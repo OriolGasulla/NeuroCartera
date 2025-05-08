@@ -1,11 +1,12 @@
 import streamlit as st
 from streamlit_lottie import st_lottie  # pip install streamlit-lottie
 import requests
-
+import streamlit.components.v1 as components
 
 from steps.pas1 import show as show_pas1
 from steps.pas2 import show as show_pas2
 from steps.pas3 import show as show_pas3
+from steps.pas4 import show as show_pas4
 from steps.resum_temporal import show as show_resum_temporal
 
 # Després dels imports:
@@ -264,6 +265,18 @@ elif st.session_state.page == "quiz_step_3":
         st.markdown('</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
+        st.button("Continuar →", on_click=lambda: st.session_state.__setitem__('page','quiz_step_4'))
+        st.markdown('</div>', unsafe_allow_html=True)
+
+elif st.session_state.page == "quiz_step_4":
+    show_pas4()
+    col1, col2 = st.columns(2, gap="small")
+    with col1:
+        st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
+        st.button("← Enrere", on_click=lambda: st.session_state.__setitem__('page','quiz_step_3'))
+        st.markdown('</div>', unsafe_allow_html=True)
+    with col2:
+        st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
         st.button("Continuar →", on_click=lambda: st.session_state.__setitem__('page','resum_temporal'))
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -272,7 +285,7 @@ elif st.session_state.page == "resum_temporal":
     col1, col2 = st.columns(2, gap="small")
     with col1:
         st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
-        st.button("← Enrere", on_click=lambda: st.session_state.__setitem__('page','quiz_step_3'))
+        st.button("← Enrere", on_click=lambda: st.session_state.__setitem__('page','quiz_step_4'))
         st.markdown('</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<div class="btn-nav">', unsafe_allow_html=True)
