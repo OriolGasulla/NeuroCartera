@@ -95,14 +95,15 @@ def show():
     )
 
     pregunta_bloc(
-        "Relació emocional amb la inversió",
-        "Si poguessis descriure la teva inversió ideal amb una metàfora, quina seria?",
+        "Relació emocional amb la por d'invertir",
+        "Si haguessis de descriure la teva por o recel respecte a invertir amb una metàfora, quina s’hi assemblaria més?",
         "risc_q5",
         [
-            "Una caixa forta on tot està segur.",
-            "Una màquina que treballa per mi mentre jo faig la meva vida.",
-            "Una planta que rego cada mes i em dona fruits al cap d’un temps.",
-            "Una aventura amb possibilitats reals de fer créixer el meu patrimoni."
+            "Una muntanya russa que pot sortir-se de control en qualsevol moment.",
+            "Un rellotge de sorra: tinc por de perdre temps i no veure resultats.",
+            "Una bomba silenciosa que pot explotar quan menys ho espero",
+            "Un núvol gris: em preocupa però no sé exactament per què.",
+            "Un camí de terra sota control: entenc que hi pot haver riscos, però no em genera por."
         ]
     )
 
