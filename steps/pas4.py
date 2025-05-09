@@ -109,4 +109,8 @@ def show():
             "Una aventura amb possibilitats reals de fer créixer el meu patrimoni."
         ]
     )
-
+    respostes = {}
+    for i in range(1, 6):
+        clau = f"exp_q{i}"
+        respostes[clau] = st.session_state.get(clau, None)
+    st.session_state["respostes_pas4"] = respostes

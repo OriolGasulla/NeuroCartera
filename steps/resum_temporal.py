@@ -17,17 +17,23 @@ def show():
 
     # PAS 3
     st.subheader("🧠 Pas 3 – Perfil de risc emocional")
-    for i in range(1, 6):
-        clau = f"risc_q{i}"
-        resposta = st.session_state.get(clau, "No respost")
-        st.write(f"**Pregunta {i}:**", resposta)
+    res3 = st.session_state.get("respostes_pas3", {})
+    if not res3:
+        st.write("No hi ha respostes de pas 3 disponibles.")
+    else:
+        for i in range(1, 6):
+            clave = f"risc_q{i}"
+            st.write(f"**Pregunta {i}:**", res3.get(clave, "No respost"))
 
     # PAS 4
-    st.subheader("📈 Pas 4 – Perfil de expectatives")
-    for i in range(1, 6):
-        clau = f"exp_q{i}"
-        resposta = st.session_state.get(clau, "No respost")
-        st.write(f"**Pregunta {i}:**", resposta)
+    st.subheader("📈 Pas 4 – Perfil d'expectatives")
+    res4 = st.session_state.get("respostes_pas4", {})
+    if not res4:
+        st.write("No hi ha respostes de pas 4 disponibles.")
+    else:
+        for i in range(1, 6):
+            clave = f"exp_q{i}"
+            st.write(f"**Pregunta {i}:**", res4.get(clave, "No respost"))
 
     # DEBUG complet (opcional)
     st.markdown("---")
